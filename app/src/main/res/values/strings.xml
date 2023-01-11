@@ -6,4 +6,22 @@
     <string name="title_favorites">Favorites</string>
     <string name="title_recents">Recents</string>
     <string name="title_contacts">Contacts</string>
+    <string name="avatar">avatar</string>
+    <string name="user_name">Phan Minh Phú</string>
+    <string name="user_tagname">\@NewDelhi, India</string>
+    <string name="chat">chat</string>
+    <string name="time">1h ago</string>
+    <string name="replace">replace</string>
+    <string name="like">like</string>
+    <string name="share">share</string>
+    <string name="titleDetail">Post Detail</string>
+    <string name="comment1">Google Developer Expert for Flutter.Passionate #Flutter, #Android Developer, #Entreprenuer #Youtuber</string>
+    <string name="comment2">Lorem Ispum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="fabAdd">Add button</string>
+    <string name="item_comment">item_comment</string>
+    <string name="item_caches">item_caches</string>
+    <string name="item_like">item_like</string>
+    <string name="item_share">item_share</string>
+    <string name="fab_content_desc">desc</string>
+    <string name="img_user">img_user</string>
 </resources>
