@@ -2,6 +2,7 @@ package com.example.contactapplication.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelLazy
 import androidx.viewbinding.ViewBinding
@@ -30,6 +31,7 @@ abstract class BaseActivity<viewModel : BaseViewModel, viewBinding : ViewBinding
         super.onCreate(savedInstanceState)
         viewBinding = inflateViewBinding(layoutInflater)
         progressDialog = ProgressDialog(this)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(viewBinding.root)
         initialize()
     }
