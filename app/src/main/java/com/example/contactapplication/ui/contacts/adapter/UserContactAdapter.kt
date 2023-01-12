@@ -3,12 +3,15 @@ package com.example.contactapplication.ui.contacts.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.contactapplication.R
 import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.ItemUserContactBinding
+import com.example.contactapplication.databinding.ItemUserContactHeaderBinding
 
 
 class UserContactAdapter :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), IClickItemUserContactListener {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(), IClickItemUserContactListener,
+    HeaderItemDecoration.StickyHeaderInterface {
     private var userContactList: List<UserContactDto>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,6 +30,45 @@ class UserContactAdapter :
 
     override fun getItemCount(): Int {
         return userContactList?.size ?: 0
+    }
+
+    override fun onClickItemUserContact(userContact: UserContactDto?) {
+    }
+
+    override fun getHeaderPositionForItem(itemPosition: Int): Int
+//    {
+//
+//    }
+    =
+        (itemPosition downTo 0)
+            .map { Pair(isHeader(it), it) }
+            .firstOrNull { it.first }?.second ?: RecyclerView.NO_POSITION
+
+    override fun getHeaderLayout(headerPosition: Int): Int {
+        return R.layout.item_user_contact_header
+        /* ...
+      return something like R.layout.view_header
+      or add conditions if you have different headers on different positions
+    ... */
+    }
+
+    override fun bindHeaderData(headBinding: ItemUserContactHeaderBinding, headerPosition: Int) {
+        if (headerPosition == RecyclerView.NO_POSITION) headBinding.root.layoutParams.height = 0
+        else {
+            headBinding.tvUserName.text = userContactList?.get(headerPosition)?.name?.first().toString()
+        }
+        /* ...
+          here you get your header and can change some data on it
+        ... */
+    }
+
+    override fun isHeader(itemPosition: Int): Boolean {
+        if ( itemPosition == 0 || userContactList?.get(itemPosition)?.name?.first() != userContactList?.get(itemPosition - 1)?.name?.first())
+            return true
+        return false
+        /* ...
+      here have to be condition for checking - is item on this position header
+    ... */
     }
 
     fun setData(userContactList: List<UserContactDto>?) {
@@ -55,9 +97,6 @@ class UserContactAdapter :
                 )
             }
         }
-    }
-
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
     }
 }
 

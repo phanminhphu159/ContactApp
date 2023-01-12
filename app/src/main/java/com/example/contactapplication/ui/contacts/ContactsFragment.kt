@@ -1,5 +1,6 @@
 package com.example.contactapplication.ui.contacts
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentContactsBinding
-import com.example.contactapplication.ui.contacts.adapter.IClickItemUserContactListener
-import com.example.contactapplication.ui.contacts.adapter.UserContactAdapter
+import com.example.contactapplication.ui.contacts.adapter.*
 
 
 class ContactsFragment : Fragment(), IClickItemUserContactListener {
@@ -54,6 +55,34 @@ class ContactsFragment : Fragment(), IClickItemUserContactListener {
         )
         listUserContact?.add(
             UserContactDto(
+                "Phan Minh Phú",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Phan Minh Phú",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Lê Hồng Mẫn",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Lê Hồng Mẫn",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
@@ -62,6 +91,34 @@ class ContactsFragment : Fragment(), IClickItemUserContactListener {
         listUserContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Bùi Đăng Dương",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Bùi Đăng Dương",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Lê Kim QUân",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
@@ -87,6 +144,20 @@ class ContactsFragment : Fragment(), IClickItemUserContactListener {
                 "193 Da Nang City"
             )
         )
+        listUserContact?.add(
+            UserContactDto(
+                "Võ Anh Nguyên",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listUserContact?.add(
+            UserContactDto(
+                "Võ Anh Nguyên",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
     }
 
 
@@ -97,6 +168,15 @@ class ContactsFragment : Fragment(), IClickItemUserContactListener {
         userContactAdapter?.setData(listUserContact)
         binding?.rvContact?.layoutManager = linearLayoutManager
         binding?.rvContact?.adapter = userContactAdapter
+        binding?.rvContact?.addItemDecoration(HeaderItemDecoration(binding?.rvContact as RecyclerView,
+            userContactAdapter!!
+        ))
+//        val adapter = SimpleRecyclerView()
+//        val layoutManager =  LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//
+//        binding?.rvContact?.adapter = adapter
+//        binding?.rvContact?.layoutManager = layoutManager
+//        binding?.rvContact?.addItemDecoration(StickHeaderItemDecoration(adapter))
     }
 
     override fun onClickItemUserContact(userContact: UserContactDto?) {

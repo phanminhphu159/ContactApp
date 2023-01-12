@@ -9,7 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#E1A00C</color>
     <color name="grey">#474747</color>
-    <color name="greyLight">#A3A3A3</color>
+    <color name="aliceblue">#F0F8FF</color>
+    <color name="lavender">#E6E6FA</color>
+    <color name="powderblue">#B0E0E6</color>
     <color name="greyDark">#292728</color>
     <color name="blue_700">#1976d2</color>
     <color name="colorPrimary">#D53A47</color>
