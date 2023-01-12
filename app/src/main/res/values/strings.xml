@@ -27,4 +27,8 @@
     <string name="item_share">item_share</string>
     <string name="fab_content_desc">desc</string>
     <string name="img_user">img_user</string>
+    <string name="phone_call">Call</string>
+    <string name="send_message">Send message</string>
+    <string name="video">Video</string>
+    <string name="contact_info">Contact Info</string>
 </resources>

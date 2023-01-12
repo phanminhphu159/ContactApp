@@ -11,32 +11,22 @@ import com.example.contactapplication.databinding.ItemUserContactHeaderBinding
 
 
 class UserContactAdapter :
-    BaseRecyclerViewAdapter<UserContactDto, UserContactAdapter.UserContactViewHolder>(),
-    IClickItemUserContactListener, HeaderItemDecoration.StickyHeaderInterface {
+    BaseRecyclerViewAdapter<UserContactDto, UserContactAdapter.UserContactViewHolder>(), HeaderItemDecoration.StickyHeaderInterface, IClickItemUserContactListener{
 
-    class UserContactViewHolder(
+    inner class UserContactViewHolder(
         private val viewBinding: ItemUserContactBinding
-    ) : RecyclerView.ViewHolder(viewBinding.root), IClickItemUserContactListener {
+    ) : RecyclerView.ViewHolder(viewBinding.root){
         fun onBindData(item: UserContactDto?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
-//            itemBinding.ivLike.setOnClickListener {
-//                    view ->
-//            }
                 layoutItem.setOnClickListener {
                     onClickItemUserContact(
                         item
                     )
+//                    this
                 }
             }
         }
-
-        override fun onClickItemUserContact(userContact: UserContactDto?) {
-            TODO("Not yet implemented")
-        }
-    }
-
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
     }
 
     override fun getHeaderPositionForItem(itemPosition: Int): Int =
@@ -71,8 +61,8 @@ class UserContactAdapter :
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
-    ): UserContactAdapter.UserContactViewHolder {
-        return UserContactAdapter.UserContactViewHolder(
+    ): UserContactViewHolder {
+        return UserContactViewHolder(
             ItemUserContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
@@ -80,6 +70,10 @@ class UserContactAdapter :
     override fun onBindViewHolder(holder: UserContactViewHolder, position: Int) {
         holder.onBindData(getItem(position))
     }
+
+    override fun onClickItemUserContact(userContact: UserContactDto?) {
+    }
+
 }
 
 interface IClickItemUserContactListener {
