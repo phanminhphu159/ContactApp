@@ -1,42 +1,156 @@
 package com.example.contactapplication.ui.recents
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.contactapplication.base.fragment.BaseFragment
+import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentRecentsBinding
+import com.example.contactapplication.ui.contacts.adapter.HeaderItemDecoration
+import com.example.contactapplication.ui.contacts.adapter.UserContactAdapter
+import com.example.contactapplication.ui.recents.adapter.UserRecentContactAdapter
 
-class RecentsFragment : Fragment() {
+class RecentsFragment : BaseFragment<RecentsViewModel, FragmentRecentsBinding>(RecentsViewModel::class) {
 
-    private var _binding: FragmentRecentsBinding? = null
+    private var listRecentContact: ArrayList<UserContactDto>? = null
+    private var recentContactAdapter: UserRecentContactAdapter? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+    override fun inflateViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(RecentsViewModel::class.java)
-
-        _binding = FragmentRecentsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        container: ViewGroup?
+    ): FragmentRecentsBinding {
+        return FragmentRecentsBinding.inflate(inflater, container, false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun initialize() {
+        setData()
+        setAdapter()
+    }
+
+    private fun setData() {
+        listRecentContact = ArrayList()
+        listRecentContact?.add(
+            UserContactDto(
+                "Phan Minh Phú",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Phan Minh Phú",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Phan Minh Phú",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Hồng Mẫn",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Hồng Mẫn",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Hồng Mẫn",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Bùi Đăng Dương",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Bùi Đăng Dương",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Bùi Đăng Dương",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Kim QUân",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Kim QUân",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Kim QUân",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Lê Thanh Vũ",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Võ Anh Nguyên",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Võ Anh Nguyên",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+        listRecentContact?.add(
+            UserContactDto(
+                "Võ Anh Nguyên",
+                905693609,
+                "193 Da Nang City"
+            )
+        )
+    }
+
+
+    private fun setAdapter() {
+        val linearLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recentContactAdapter = UserRecentContactAdapter()
+        recentContactAdapter?.addData(listRecentContact)
+        viewBinding.rvRecentContact.layoutManager = linearLayoutManager
+        viewBinding.rvRecentContact.adapter = recentContactAdapter
     }
 }

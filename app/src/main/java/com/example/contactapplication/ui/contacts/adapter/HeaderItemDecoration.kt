@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contactapplication.databinding.ItemUserContactBinding
 import com.example.contactapplication.databinding.ItemUserContactHeaderBinding
 
 class HeaderItemDecoration(recyclerView: RecyclerView, private val listener: StickyHeaderInterface) : RecyclerView.ItemDecoration() {

@@ -1,47 +1,31 @@
 package com.example.contactapplication.ui.contacts
 
-import android.R
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentContactsBinding
 import com.example.contactapplication.ui.contacts.adapter.*
 
 
-class ContactsFragment : Fragment(), IClickItemUserContactListener {
+class ContactsFragment :
+    BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class) {
 
-    private var _binding: FragmentContactsBinding? = null
     private var listUserContact: ArrayList<UserContactDto>? = null
     private var userContactAdapter: UserContactAdapter? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+    override fun inflateViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ContactsViewModel::class.java)
-
-        _binding = FragmentContactsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        setData()
-        setAdapter()
-        return root
+        container: ViewGroup?
+    ): FragmentContactsBinding {
+        return FragmentContactsBinding.inflate(inflater, container, false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun initialize() {
+        setData()
+        setAdapter()
     }
 
     private fun setData() {
@@ -165,21 +149,14 @@ class ContactsFragment : Fragment(), IClickItemUserContactListener {
         val linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         userContactAdapter = UserContactAdapter()
-        userContactAdapter?.setData(listUserContact)
-        binding?.rvContact?.layoutManager = linearLayoutManager
-        binding?.rvContact?.adapter = userContactAdapter
-        binding?.rvContact?.addItemDecoration(HeaderItemDecoration(binding?.rvContact as RecyclerView,
-            userContactAdapter!!
-        ))
-//        val adapter = SimpleRecyclerView()
-//        val layoutManager =  LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//
-//        binding?.rvContact?.adapter = adapter
-//        binding?.rvContact?.layoutManager = layoutManager
-//        binding?.rvContact?.addItemDecoration(StickHeaderItemDecoration(adapter))
-    }
-
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
-
+        userContactAdapter?.addData(listUserContact)
+        viewBinding.rvContact.layoutManager = linearLayoutManager
+        viewBinding.rvContact.adapter = userContactAdapter
+        viewBinding.rvContact.addItemDecoration(
+            HeaderItemDecoration(
+                viewBinding.rvContact as RecyclerView,
+                userContactAdapter!!
+            )
+        )
     }
 }

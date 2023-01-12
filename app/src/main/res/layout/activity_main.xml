@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLineVertical0.90"
+        style="@style/guideLineVertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLineHorizontal0.85"
+        style="@style/guideLineHorizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,5 +89,17 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnPhoneCall"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:src="@drawable/ic_phone_number"
+        app:fabCustomSize="@dimen/_45sdp"
+        app:layout_constraintTop_toTopOf="@id/guideLineHorizontal0.85"
+        app:layout_constraintBottom_toBottomOf="@id/guideLineHorizontal0.85"
+        app:layout_constraintEnd_toEndOf="@id/guideLineVertical0.90"
+        app:layout_constraintStart_toStartOf="@id/guideLineVertical0.90"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
