@@ -2,9 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_marginStart="@dimen/_60sdp"
-    android:layout_height="@dimen/_50sdp"
-    android:layout_margin="@dimen/_4sdp">
+    android:layout_height="@dimen/_35sdp"
+    android:backgroundTint="@color/blue_700"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutItem"
@@ -23,16 +23,6 @@
             style="@style/guideLineHorizontal"
             app:layout_constraintGuide_percent="0.5" />
 
-        <ImageView
-            android:id="@+id/ivAvatar"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:contentDescription="@string/avatar"
-            android:src="@drawable/ic_user_avatar"
-            app:layout_constraintBottom_toBottomOf="@id/guideLineHorizontal0.50"
-            app:layout_constraintEnd_toEndOf="@id/guideLineVertical0.10"
-            app:layout_constraintStart_toStartOf="@id/guideLineVertical0.10"
-            app:layout_constraintTop_toTopOf="@id/guideLineHorizontal0.50" />
 
 
         <TextView
@@ -40,11 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:text="@string/user_name"
+            android:text="@string/word_a"
             android:textColor="@color/black"
-            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintBottom_toBottomOf="@id/guideLineHorizontal0.50"
-            app:layout_constraintStart_toEndOf="@id/ivAvatar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideLineHorizontal0.50" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
