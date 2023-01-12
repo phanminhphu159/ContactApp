@@ -1,29 +1,26 @@
-package com.example.contactapplication.ui.contacts
+package com.example.contactapplication.ui.contactDetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.data.remote.dto.UserContactDto
+import com.example.contactapplication.databinding.FragmentContactDetailBinding
 import com.example.contactapplication.databinding.FragmentContactsBinding
-import com.example.contactapplication.ktext.context.replaceFragment
-import com.example.contactapplication.ui.contactDetail.ContactDetailFragment
-import com.example.contactapplication.ui.contacts.adapter.*
+import com.example.contactapplication.databinding.FragmentRecentsBinding
+import com.example.contactapplication.ui.contactDetail.adapter.ContactInfoAdapter
+import com.example.contactapplication.ui.recents.adapter.UserRecentContactAdapter
 
+class ContactDetailFragment : BaseFragment<ContactDetailViewModel, FragmentContactDetailBinding>(ContactDetailViewModel::class) {
 
-class ContactsFragment :
-    BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class), IClickItemUserContactListener {
-
-    private var listUserContact: ArrayList<UserContactDto>? = null
-    private var userContactAdapter: UserContactAdapter? = null
+    private var listContactInfo: ArrayList<UserContactDto>? = null
+    private var contactInfoAdapter: ContactInfoAdapter? = null
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentContactsBinding {
-        return FragmentContactsBinding.inflate(inflater, container, false)
+    ): FragmentContactDetailBinding {
+        return FragmentContactDetailBinding.inflate(inflater, container, false)
     }
 
     override fun initialize() {
@@ -32,113 +29,113 @@ class ContactsFragment :
     }
 
     private fun setData() {
-        listUserContact = ArrayList()
-        listUserContact?.add(
+        listContactInfo = ArrayList()
+        listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Thanh Vũ",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listUserContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
                 905693609,
@@ -151,19 +148,9 @@ class ContactsFragment :
     private fun setAdapter() {
         val linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        userContactAdapter = UserContactAdapter()
-        userContactAdapter?.addData(listUserContact)
-        viewBinding.rvContact.layoutManager = linearLayoutManager
-        viewBinding.rvContact.adapter = userContactAdapter
-        viewBinding.rvContact.addItemDecoration(
-            HeaderItemDecoration(
-                viewBinding.rvContact as RecyclerView,
-                userContactAdapter!!
-            )
-        )
-    }
-
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
-        replaceFragment(R.id.nav_host_fragment_activity_main, ContactDetailFragment())
+        contactInfoAdapter = ContactInfoAdapter()
+        contactInfoAdapter?.addData(listContactInfo)
+        viewBinding.rvContactInfo.layoutManager = linearLayoutManager
+        viewBinding.rvContactInfo.adapter = contactInfoAdapter
     }
 }
