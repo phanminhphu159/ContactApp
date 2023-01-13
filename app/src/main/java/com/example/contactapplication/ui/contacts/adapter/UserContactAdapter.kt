@@ -19,7 +19,7 @@ class UserContactAdapter :
         fun onBindData(item: UserContactDto?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
-                layoutItem.setOnClickListener {
+                layoutUserContact.setOnClickListener {
                     onClickItemUserContact(
                         item
                     )
