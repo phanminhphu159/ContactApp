@@ -3,8 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="?attr/actionBarSize">
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLineVertical0.90"
+        style="@style/guideLineVertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLineHorizontal0.85"
+        style="@style/guideLineHorizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/shape_search_contact"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_weight="13"
+                android:background="@android:color/transparent"
+                android:ellipsize="end"
+                android:hint="@string/search_user_contact"
+                android:inputType="text"
+                android:maxLines="1" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_micro_phone" />
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_3_dots_vertical" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -29,5 +89,17 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnPhoneCall"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:src="@drawable/ic_phone_number"
+        app:fabCustomSize="@dimen/_45sdp"
+        app:layout_constraintTop_toTopOf="@id/guideLineHorizontal0.85"
+        app:layout_constraintBottom_toBottomOf="@id/guideLineHorizontal0.85"
+        app:layout_constraintEnd_toEndOf="@id/guideLineVertical0.90"
+        app:layout_constraintStart_toStartOf="@id/guideLineVertical0.90"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

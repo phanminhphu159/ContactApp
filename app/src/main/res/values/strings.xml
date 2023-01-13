@@ -8,6 +8,9 @@
     <string name="title_contacts">Contacts</string>
     <string name="avatar">avatar</string>
     <string name="user_name">Phan Minh Phú</string>
+    <string name="word_a">A</string>
+    <string name="time_call">Th 2</string>
+    <string name="search_user_contact">Searching user contact</string>
     <string name="user_tagname">\@NewDelhi, India</string>
     <string name="chat">chat</string>
     <string name="time">1h ago</string>
@@ -24,4 +27,9 @@
     <string name="item_share">item_share</string>
     <string name="fab_content_desc">desc</string>
     <string name="img_user">img_user</string>
+    <string name="phone_call">Call</string>
+    <string name="send_message">Send message</string>
+    <string name="message">Message</string>
+    <string name="video">Video</string>
+    <string name="contact_info">Contact Info</string>
 </resources>

@@ -1,26 +1,26 @@
-package com.example.contactapplication.ui.recents
+package com.example.contactapplication.ui.contactDetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.data.remote.dto.UserContactDto
+import com.example.contactapplication.databinding.FragmentContactDetailBinding
+import com.example.contactapplication.databinding.FragmentContactsBinding
 import com.example.contactapplication.databinding.FragmentRecentsBinding
-import com.example.contactapplication.ui.contacts.adapter.HeaderItemDecoration
-import com.example.contactapplication.ui.contacts.adapter.UserContactAdapter
+import com.example.contactapplication.ui.contactDetail.adapter.ContactInfoAdapter
 import com.example.contactapplication.ui.recents.adapter.UserRecentContactAdapter
 
-class RecentsFragment : BaseFragment<RecentsViewModel, FragmentRecentsBinding>(RecentsViewModel::class) {
+class ContactDetailFragment : BaseFragment<ContactDetailViewModel, FragmentContactDetailBinding>(ContactDetailViewModel::class) {
 
-    private var listRecentContact: ArrayList<UserContactDto>? = null
-    private var recentContactAdapter: UserRecentContactAdapter? = null
+    private var listContactInfo: ArrayList<UserContactDto>? = null
+    private var contactInfoAdapter: ContactInfoAdapter? = null
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentRecentsBinding {
-        return FragmentRecentsBinding.inflate(inflater, container, false)
+    ): FragmentContactDetailBinding {
+        return FragmentContactDetailBinding.inflate(inflater, container, false)
     }
 
     override fun initialize() {
@@ -29,113 +29,113 @@ class RecentsFragment : BaseFragment<RecentsViewModel, FragmentRecentsBinding>(R
     }
 
     private fun setData() {
-        listRecentContact = ArrayList()
-        listRecentContact?.add(
+        listContactInfo = ArrayList()
+        listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Kim QUân",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Lê Thanh Vũ",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
                 905693609,
                 "193 Da Nang City"
             )
         )
-        listRecentContact?.add(
+        listContactInfo?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
                 905693609,
@@ -148,9 +148,9 @@ class RecentsFragment : BaseFragment<RecentsViewModel, FragmentRecentsBinding>(R
     private fun setAdapter() {
         val linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        recentContactAdapter = UserRecentContactAdapter()
-        recentContactAdapter?.addData(listRecentContact)
-        viewBinding.rvRecentContact.layoutManager = linearLayoutManager
-        viewBinding.rvRecentContact.adapter = recentContactAdapter
+        contactInfoAdapter = ContactInfoAdapter()
+        contactInfoAdapter?.addData(listContactInfo)
+        viewBinding.rvContactInfo.layoutManager = linearLayoutManager
+        viewBinding.rvContactInfo.adapter = contactInfoAdapter
     }
 }
