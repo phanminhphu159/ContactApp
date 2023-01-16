@@ -7,6 +7,7 @@ object Constant {
     /**
      * Date
      */
+    const val REQUEST_PHONE_CODE = 12345
     const val KTEXT_TIME_ZONE_UTC = "UTC"
     const val KTEXT_DATE_TIME_FORMAT_UTC = "yyyy-MM-dd'T'HH:mm:ssX"
     const val KTEXT_TIME_FORMAT_HH_MM = "HH:mm"

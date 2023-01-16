@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactapplication.base.BaseActivity
 import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.ActivityContactDetailBinding
+import com.example.contactapplication.ktext.Constant
 import com.example.contactapplication.ui.contactDetail.adapter.ContactInfoAdapter
 
 
@@ -188,7 +189,7 @@ class ContactDetailActivity :
                 ) {
                     ActivityCompat.requestPermissions(
                         this@ContactDetailActivity, arrayOf(android.Manifest.permission.CALL_PHONE),
-                        REQUEST_CODE
+                        Constant.REQUEST_PHONE_CODE
                     )
                 } else {
                     startActivity(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", contactPhone, null)))
@@ -200,9 +201,5 @@ class ContactDetailActivity :
             btnCallVideo.setOnClickListener { }
             ivBackButton.setOnClickListener { onBackPressed() }
         }
-    }
-
-    companion object {
-        private const val REQUEST_CODE = 12345
     }
 }

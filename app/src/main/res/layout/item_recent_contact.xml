@@ -61,6 +61,7 @@
             app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal0.50" />
 
         <ImageView
+            android:id="@+id/btnCallPhone"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/_8sdp"
@@ -93,6 +94,7 @@
         tools:visibility="visible">
 
         <LinearLayout
+            android:id="@+id/btnCallVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,6 +123,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnSendMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -149,6 +152,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnHistoryContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -169,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                android:text="@string/video"
+                android:text="@string/history"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
