@@ -10,20 +10,22 @@ import com.example.contactapplication.databinding.ItemUserContactBinding
 import com.example.contactapplication.databinding.ItemUserContactHeaderBinding
 
 
-class UserContactAdapter :
-    BaseRecyclerViewAdapter<UserContactDto, UserContactAdapter.UserContactViewHolder>(), HeaderItemDecoration.StickyHeaderInterface, IClickItemUserContactListener{
+class UserContactAdapter(
+    private val iClickItemUserContactListener: IClickItemUserContactListener
+) :
+    BaseRecyclerViewAdapter<UserContactDto, UserContactAdapter.UserContactViewHolder>(),
+    HeaderItemDecoration.StickyHeaderInterface {
 
     inner class UserContactViewHolder(
         private val viewBinding: ItemUserContactBinding
-    ) : RecyclerView.ViewHolder(viewBinding.root){
+    ) : RecyclerView.ViewHolder(viewBinding.root) {
         fun onBindData(item: UserContactDto?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
                 layoutUserContact.setOnClickListener {
-                    onClickItemUserContact(
+                    iClickItemUserContactListener.onClickItemUserContact(
                         item
                     )
-//                    this
                 }
             }
         }
@@ -70,10 +72,6 @@ class UserContactAdapter :
     override fun onBindViewHolder(holder: UserContactViewHolder, position: Int) {
         holder.onBindData(getItem(position))
     }
-
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
-    }
-
 }
 
 interface IClickItemUserContactListener {

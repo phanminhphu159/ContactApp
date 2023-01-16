@@ -33,112 +33,112 @@ class RecentsFragment : BaseFragment<RecentsViewModel, FragmentRecentsBinding>(R
         listRecentContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Kim QUân",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Kim QUân",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Kim QUân",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Lê Thanh Vũ",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listRecentContact?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )

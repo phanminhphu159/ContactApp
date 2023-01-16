@@ -1,20 +1,21 @@
 package com.example.contactapplication.ui.contacts
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentContactsBinding
-import com.example.contactapplication.ktext.context.replaceFragment
-import com.example.contactapplication.ui.contactDetail.ContactDetailFragment
+import com.example.contactapplication.ui.contactDetail.ContactDetailActivity
 import com.example.contactapplication.ui.contacts.adapter.*
 
 
 class ContactsFragment :
-    BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class), IClickItemUserContactListener {
+    BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class),
+    IClickItemUserContactListener {
 
     private var listUserContact: ArrayList<UserContactDto>? = null
     private var userContactAdapter: UserContactAdapter? = null
@@ -36,112 +37,112 @@ class ContactsFragment :
         listUserContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Hồng Mẫn",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Bùi Đăng Dương",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Kim QUân",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Kim QUân",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Kim QUân",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Lê Thanh Vũ",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
         listUserContact?.add(
             UserContactDto(
                 "Võ Anh Nguyên",
-                905693609,
+                "+84905693609",
                 "193 Da Nang City"
             )
         )
@@ -151,19 +152,25 @@ class ContactsFragment :
     private fun setAdapter() {
         val linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        userContactAdapter = UserContactAdapter()
+        userContactAdapter = UserContactAdapter(this)
         userContactAdapter?.addData(listUserContact)
         viewBinding.rvContact.layoutManager = linearLayoutManager
         viewBinding.rvContact.adapter = userContactAdapter
-        viewBinding.rvContact.addItemDecoration(
-            HeaderItemDecoration(
-                viewBinding.rvContact as RecyclerView,
-                userContactAdapter!!
-            )
-        )
+//        viewBinding.rvContact.addItemDecoration(
+//            HeaderItemDecoration(
+//                viewBinding.rvContact as RecyclerView,
+//                userContactAdapter!!
+//            )
+//        )
     }
 
     override fun onClickItemUserContact(userContact: UserContactDto?) {
-        replaceFragment(R.id.nav_host_fragment_activity_main, ContactDetailFragment())
+        val mIntent = Intent(activity, ContactDetailActivity::class.java)
+        val mBundle = Bundle()
+        mBundle.putString("name", userContact?.name)
+        mBundle.putString("phone", userContact?.phone)
+        mBundle.putString("address", userContact?.address)
+        mIntent.putExtras(mBundle);
+        activity?.startActivity(mIntent)
     }
 }

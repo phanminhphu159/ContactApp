@@ -116,6 +116,7 @@ inline fun FragmentManager.transact(
     beginTransaction().apply {
         setAnimations(animateType)
         action()
+        setReorderingAllowed(true)
     }.commitAllowingStateLoss()
 }
 
