@@ -13,8 +13,11 @@ import com.example.contactapplication.databinding.ItemUserContactHeaderBinding
 class UserContactAdapter(
     private val iClickItemUserContactListener: IClickItemUserContactListener
 ) :
-    BaseRecyclerViewAdapter<UserContactDto, UserContactAdapter.UserContactViewHolder>(),
+    BaseRecyclerViewAdapter<UserContactDto, RecyclerView.ViewHolder>(),
     HeaderItemDecoration.StickyHeaderInterface {
+
+    private val headerType = 1
+    private val itemType = 2
 
     inner class UserContactViewHolder(
         private val viewBinding: ItemUserContactBinding
@@ -29,6 +32,46 @@ class UserContactAdapter(
                 }
             }
         }
+    }
+
+    inner class HeaderContactViewHolder(
+        private val viewBinding: ItemUserContactBinding
+    ) : RecyclerView.ViewHolder(viewBinding.root) {
+        fun onBindHeader(item: UserContactDto?) {
+            with(viewBinding) {
+                tvUserName.text = item?.name
+                ivAvatar.setImageResource(R.drawable.ic_add_user)
+                layoutUserContact.setOnClickListener {
+                    iClickItemUserContactListener.onClickAddUserContact(
+                    )
+                }
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int
+    ): RecyclerView.ViewHolder {
+
+        if (viewType == headerType)
+            return HeaderContactViewHolder(
+                ItemUserContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
+        return UserContactViewHolder(
+            ItemUserContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder.itemViewType == headerType) {
+            (holder as HeaderContactViewHolder).onBindHeader(getItem(position))
+        } else {
+            (holder as UserContactViewHolder).onBindData(getItem(position))
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) headerType else itemType
     }
 
     override fun getHeaderPositionForItem(itemPosition: Int): Int =
@@ -60,21 +103,10 @@ class UserContactAdapter(
       here have to be condition for checking - is item on this position header
     ... */
     }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup, viewType: Int
-    ): UserContactViewHolder {
-        return UserContactViewHolder(
-            ItemUserContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
-    }
-
-    override fun onBindViewHolder(holder: UserContactViewHolder, position: Int) {
-        holder.onBindData(getItem(position))
-    }
 }
 
 interface IClickItemUserContactListener {
     fun onClickItemUserContact(userContact: UserContactDto?)
+    fun onClickAddUserContact()
 }
 

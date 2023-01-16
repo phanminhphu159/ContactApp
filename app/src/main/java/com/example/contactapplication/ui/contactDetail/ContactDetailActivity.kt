@@ -45,6 +45,11 @@ class ContactDetailActivity :
         listContactInfo?.add(
             UserContactDto(
                 "Phan Minh Phú",
+            )
+        )
+        listContactInfo?.add(
+            UserContactDto(
+                "Phan Minh Phú",
                 "+84905693609",
                 "193 Da Nang City"
             )

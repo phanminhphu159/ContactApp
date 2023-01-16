@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.data.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentContactsBinding
@@ -17,7 +18,7 @@ class ContactsFragment :
     BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class),
     IClickItemUserContactListener {
 
-    private var listUserContact: ArrayList<UserContactDto>? = null
+    private var listUserContact: MutableList<UserContactDto>? = null
     private var userContactAdapter: UserContactAdapter? = null
 
     override fun inflateViewBinding(
@@ -33,7 +34,12 @@ class ContactsFragment :
     }
 
     private fun setData() {
-        listUserContact = ArrayList()
+        listUserContact = mutableListOf()
+        listUserContact?.add(
+            UserContactDto(
+                name = getString(R.string.add_user_contact)
+            )
+        )
         listUserContact?.add(
             UserContactDto(
                 "Phan Minh Phú",
@@ -120,8 +126,8 @@ class ContactsFragment :
         )
         listUserContact?.add(
             UserContactDto(
-                "Lê Thanh Vũ",
-                "+84905693609",
+                "Lê Thanh Vũ11",
+                "+849056936022229",
                 "193 Da Nang City"
             )
         )
@@ -172,5 +178,8 @@ class ContactsFragment :
         mBundle.putString("address", userContact?.address)
         mIntent.putExtras(mBundle);
         activity?.startActivity(mIntent)
+    }
+
+    override fun onClickAddUserContact() {
     }
 }

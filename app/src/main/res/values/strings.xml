@@ -10,6 +10,8 @@
     <string name="avatar">avatar</string>
     <string name="user_name">Phan Minh Phú</string>
     <string name="contact_phone">+84905693609</string>
+    <string name="save">Save</string>
+    <string name="name">Name</string>
     <string name="word_a">A</string>
     <string name="time_call">Th 2</string>
     <string name="search_user_contact">Searching user contact</string>
@@ -29,10 +31,11 @@
     <string name="item_share">item_share</string>
     <string name="fab_content_desc">desc</string>
     <string name="img_user">img_user</string>
-    <string name="phone_call">Call</string>
+    <string name="call">Call</string>
     <string name="send_message">Send message</string>
     <string name="message">Message</string>
     <string name="video">Video</string>
     <string name="history">History</string>
     <string name="contact_info">Contact Info</string>
+    <string name="add_user_contact">Add user contact</string>
 </resources>

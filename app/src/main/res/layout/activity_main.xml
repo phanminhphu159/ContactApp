@@ -26,7 +26,7 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/shape_search_contact"
+            android:background="@drawable/shape_aliceblue_border_200sdp"
             android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
