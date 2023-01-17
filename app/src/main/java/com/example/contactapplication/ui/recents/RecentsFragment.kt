@@ -8,14 +8,11 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.contactapplication.App
 import com.example.contactapplication.base.fragment.BaseFragment
-import com.example.contactapplication.data.remote.dto.UserContactDto
+import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentRecentsBinding
 import com.example.contactapplication.ktext.Constant
-import com.example.contactapplication.ui.contactDetail.ContactDetailActivity
-import com.example.contactapplication.ui.contacts.adapter.HeaderItemDecoration
-import com.example.contactapplication.ui.contacts.adapter.UserContactAdapter
 import com.example.contactapplication.ui.recents.adapter.IClickItemRecentContactListener
 import com.example.contactapplication.ui.recents.adapter.UserRecentContactAdapter
 
@@ -23,7 +20,7 @@ class RecentsFragment :
     BaseFragment<RecentsViewModel, FragmentRecentsBinding>(RecentsViewModel::class),
     IClickItemRecentContactListener {
 
-    private var listRecentContact: ArrayList<UserContactDto>? = null
+    private var listRecentContact: MutableList<UserContactDto>? = null
     private var recentContactAdapter: UserRecentContactAdapter? = null
 
     override fun inflateViewBinding(
@@ -53,7 +50,12 @@ class RecentsFragment :
                 )
             }
         } else {
-            startActivity(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", userContact?.phone, null)))
+            startActivity(
+                Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.fromParts("tel", userContact?.phone, null)
+                )
+            )
         }
     }
 
@@ -68,121 +70,16 @@ class RecentsFragment :
     }
 
     private fun setData() {
-        listRecentContact = ArrayList()
-        listRecentContact?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
+        listRecentContact = mutableListOf()
+        for (userContact in App.listContact) {
+            listRecentContact?.add(
+                UserContactDto(
+                    name = userContact.name,
+                    phone = userContact.phone
+                )
             )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Lê Thanh Vũ",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listRecentContact?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
+        }
     }
-
 
     private fun setAdapter() {
         val linearLayoutManager =

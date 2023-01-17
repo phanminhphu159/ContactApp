@@ -9,8 +9,12 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.contactapplication.base.BaseActivity
+import com.example.contactapplication.data.dao.UserContactDao
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ActivityMainBinding
 import com.example.contactapplication.ktext.Constant
+import timber.log.Timber
+
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewModel::class) {
 
@@ -21,15 +25,25 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewMo
     override fun initialize() {
         setView()
         setOnClick()
+        logDatabase()
     }
 
-    private fun setView(){
+    private fun logDatabase() {
+        val userContactDao: UserContactDao = App.database.userDAO
+        val items: List<UserContactEntity> = userContactDao.getUsers()
+        val currentDBPath = getDatabasePath("mydb.db").absolutePath
+        Timber.plant(Timber.DebugTree())
+        Timber.i("List ::: ${items.toString()}")
+        Timber.i("DataBase ::: ${currentDBPath.toString()}")
+    }
+
+    private fun setView() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         viewBinding.bnvFooter.setupWithNavController(navController)
     }
 
     private fun setOnClick() {
-        with(viewBinding){
+        with(viewBinding) {
             btnPhoneCall.setOnClickListener {
                 if (ContextCompat.checkSelfPermission(
                         this@MainActivity,

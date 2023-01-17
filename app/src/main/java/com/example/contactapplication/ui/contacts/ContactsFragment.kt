@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.contactapplication.App
 import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
-import com.example.contactapplication.data.remote.dto.UserContactDto
+import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentContactsBinding
+import com.example.contactapplication.ui.contactAddUser.ContactAddUserActivity
 import com.example.contactapplication.ui.contactDetail.ContactDetailActivity
 import com.example.contactapplication.ui.contacts.adapter.*
 
@@ -35,123 +36,14 @@ class ContactsFragment :
 
     private fun setData() {
         listUserContact = mutableListOf()
-        listUserContact?.add(
-            UserContactDto(
-                name = getString(R.string.add_user_contact)
+        for (userContact in App.listContact) {
+            listUserContact?.add(
+                UserContactDto(
+                    name = userContact.name,
+                    phone = userContact.phone
+                )
             )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Lê Thanh Vũ11",
-                "+849056936022229",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listUserContact?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
+        }
     }
 
 
@@ -159,6 +51,11 @@ class ContactsFragment :
         val linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         userContactAdapter = UserContactAdapter(this)
+        listUserContact?.add(
+            0, UserContactDto(
+                name = getString(R.string.add_user_contact)
+            )
+        )
         userContactAdapter?.addData(listUserContact)
         viewBinding.rvContact.layoutManager = linearLayoutManager
         viewBinding.rvContact.adapter = userContactAdapter
@@ -181,5 +78,6 @@ class ContactsFragment :
     }
 
     override fun onClickAddUserContact() {
+        activity?.startActivity(Intent(activity, ContactAddUserActivity::class.java))
     }
 }

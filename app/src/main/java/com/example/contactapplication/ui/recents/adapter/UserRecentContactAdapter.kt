@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
-import com.example.contactapplication.data.remote.dto.UserContactDto
+import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.ItemRecentContactBinding
 
 class UserRecentContactAdapter(

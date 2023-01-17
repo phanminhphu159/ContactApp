@@ -1,4 +1,4 @@
-package com.example.contactapplication.data.remote.dto
+package com.example.contactapplication.model.remote.dto
 
 data class UserContactDto(
     val name: String? = null,

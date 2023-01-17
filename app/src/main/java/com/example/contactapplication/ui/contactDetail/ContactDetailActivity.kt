@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.contactapplication.App
 import com.example.contactapplication.base.BaseActivity
-import com.example.contactapplication.data.remote.dto.UserContactDto
+import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.ActivityContactDetailBinding
 import com.example.contactapplication.ktext.Constant
 import com.example.contactapplication.ui.contactDetail.adapter.ContactInfoAdapter
@@ -17,7 +18,7 @@ import com.example.contactapplication.ui.contactDetail.adapter.ContactInfoAdapte
 class ContactDetailActivity :
     BaseActivity<ContactDetailViewModel, ActivityContactDetailBinding>(ContactDetailViewModel::class) {
 
-    private var listContactInfo: ArrayList<UserContactDto>? = null
+    private var listContactInfo: MutableList<UserContactDto>? = null
     private var contactInfoAdapter: ContactInfoAdapter? = null
     private var contactName: String? = null
     private var contactPhone: String? = null
@@ -41,124 +42,15 @@ class ContactDetailActivity :
     }
 
     private fun setData() {
-        listContactInfo = ArrayList()
-        listContactInfo?.add(
-            UserContactDto(
-                "Phan Minh Phú",
+        listContactInfo = mutableListOf()
+        for (userContact in App.listContact) {
+            listContactInfo?.add(
+                UserContactDto(
+                    name = userContact.name,
+                    phone = userContact.phone
+                )
             )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Phan Minh Phú",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Hồng Mẫn",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Bùi Đăng Dương",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Kim QUân",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Lê Thanh Vũ",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
-        listContactInfo?.add(
-            UserContactDto(
-                "Võ Anh Nguyên",
-                "+84905693609",
-                "193 Da Nang City"
-            )
-        )
+        }
     }
 
     private fun setView() {
