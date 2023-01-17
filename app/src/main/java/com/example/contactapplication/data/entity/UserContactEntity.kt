@@ -8,5 +8,7 @@ import androidx.room.PrimaryKey
 data class UserContactEntity(
     @PrimaryKey(autoGenerate = true) val uid: Int? = null,
     @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "phone") val phone: String?
+    @ColumnInfo(name = "phone") val phone: String?,
+    @ColumnInfo(name = "favorite") val favorite: Boolean?
+
 )

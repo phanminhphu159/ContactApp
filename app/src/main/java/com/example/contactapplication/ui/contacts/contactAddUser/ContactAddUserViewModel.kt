@@ -1,4 +1,4 @@
-package com.example.contactapplication.ui.contactAddUser
+package com.example.contactapplication.ui.contacts.contactAddUser
 
 import com.example.contactapplication.base.viewmodel.BaseViewModel
 

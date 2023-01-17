@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.contactapplication.databinding.ItemUserContactHeaderBinding
+import com.example.contactapplication.databinding.ItemContactHeaderBinding
 
 class HeaderItemDecoration(recyclerView: RecyclerView, private val listener: StickyHeaderInterface) : RecyclerView.ItemDecoration() {
 
@@ -54,7 +54,7 @@ class HeaderItemDecoration(recyclerView: RecyclerView, private val listener: Sti
     private fun getHeaderViewForItem(itemPosition: Int, parent: RecyclerView): View {
         val headerPosition = listener.getHeaderPositionForItem(itemPosition)
         val layoutResId = listener.getHeaderLayout(headerPosition)
-        val header = ItemUserContactHeaderBinding.inflate(
+        val header = ItemContactHeaderBinding.inflate(
             LayoutInflater.from(
                 parent.context
             ), parent, false
@@ -116,7 +116,7 @@ class HeaderItemDecoration(recyclerView: RecyclerView, private val listener: Sti
 
         fun getHeaderLayout(headerPosition: Int): Int
 
-        fun bindHeaderData(header: ItemUserContactHeaderBinding, headerPosition: Int)
+        fun bindHeaderData(header: ItemContactHeaderBinding, headerPosition: Int)
 
         fun isHeader(itemPosition: Int): Boolean
     }

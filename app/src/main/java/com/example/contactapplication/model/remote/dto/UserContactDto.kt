@@ -4,4 +4,5 @@ data class UserContactDto(
     val name: String? = null,
     val phone: String? = null,
     val address: String? = null,
+    val favorite: Boolean? = false,
 )

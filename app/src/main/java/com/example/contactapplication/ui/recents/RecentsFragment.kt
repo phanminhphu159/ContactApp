@@ -13,6 +13,7 @@ import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentRecentsBinding
 import com.example.contactapplication.ktext.Constant
+import com.example.contactapplication.ktext.recyclerView.initRecyclerViewAdapter
 import com.example.contactapplication.ui.recents.adapter.IClickItemRecentContactListener
 import com.example.contactapplication.ui.recents.adapter.UserRecentContactAdapter
 
@@ -82,11 +83,12 @@ class RecentsFragment :
     }
 
     private fun setAdapter() {
-        val linearLayoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recentContactAdapter = UserRecentContactAdapter(this)
         recentContactAdapter?.addData(listRecentContact)
-        viewBinding.rvRecentContact.layoutManager = linearLayoutManager
-        viewBinding.rvRecentContact.adapter = recentContactAdapter
+        viewBinding.rvRecentContact.initRecyclerViewAdapter(
+            recentContactAdapter,
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+            true
+        )
     }
 }

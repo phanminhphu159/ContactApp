@@ -23,7 +23,7 @@ interface UserContactDao {
     fun insert(vararg users: UserContactEntity)
 
     @Update
-    fun update(vararg items: UserContactEntity?)
+    suspend fun updateContact(vararg items: UserContactEntity?)
 
     @Delete
     fun delete(item: UserContactEntity?)

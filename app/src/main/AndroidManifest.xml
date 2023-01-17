@@ -29,10 +29,13 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.contactDetail.ContactDetailActivity"
+            android:name=".ui.contacts.contactDetail.ContactDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.contactAddUser.ContactAddUserActivity"
+            android:name=".ui.contacts.contactAddUser.ContactAddUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.favorites.addFavorite.FavoriteAddActivity"
             android:exported="false" />
     </application>
 

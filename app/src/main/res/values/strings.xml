@@ -10,7 +10,11 @@
     <string name="avatar">avatar</string>
     <string name="user_name">Phan Minh Phú</string>
     <string name="contact_phone">+84905693609</string>
+    <string name="choose_contact">Choose a contact</string>
     <string name="save">Save</string>
+    <string name="call_your_favorite_contact">Call your favorite contacts with just one tap</string>
+    <string name="add_a_favorite">Add a favorite</string>
+    <string name="add">Add</string>
     <string name="name">Name</string>
     <string name="word_a">A</string>
     <string name="time_call">Th 2</string>
@@ -38,4 +42,8 @@
     <string name="history">History</string>
     <string name="contact_info">Contact Info</string>
     <string name="add_user_contact">Add new user contact</string>
+    <string name="ok">OK</string>
+    <string name="notification">Notification</string>
+    <string name="pls_fill_in_contact_name_or_password">Please fill in Contact"'"s name or password</string>
+
 </resources>

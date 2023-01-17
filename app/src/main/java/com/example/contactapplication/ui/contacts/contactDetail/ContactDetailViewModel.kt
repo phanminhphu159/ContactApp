@@ -1,4 +1,4 @@
-package com.example.contactapplication.ui.contactDetail
+package com.example.contactapplication.ui.contacts.contactDetail
 
 import com.example.contactapplication.base.viewmodel.BaseViewModel
 

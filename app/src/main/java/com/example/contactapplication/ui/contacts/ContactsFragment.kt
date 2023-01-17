@@ -4,20 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactapplication.App
 import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.FragmentContactsBinding
-import com.example.contactapplication.ui.contactAddUser.ContactAddUserActivity
-import com.example.contactapplication.ui.contactDetail.ContactDetailActivity
+import com.example.contactapplication.ktext.recyclerView.initRecyclerViewAdapter
+import com.example.contactapplication.ui.contacts.contactAddUser.ContactAddUserActivity
+import com.example.contactapplication.ui.contacts.contactDetail.ContactDetailActivity
 import com.example.contactapplication.ui.contacts.adapter.*
 
 
 class ContactsFragment :
     BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class),
-    IClickItemUserContactListener {
+    IClickItemContactListener {
 
     private var listUserContact: MutableList<UserContactDto>? = null
     private var userContactAdapter: UserContactAdapter? = null
@@ -48,8 +50,6 @@ class ContactsFragment :
 
 
     private fun setAdapter() {
-        val linearLayoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         userContactAdapter = UserContactAdapter(this)
         listUserContact?.add(
             0, UserContactDto(
@@ -57,8 +57,11 @@ class ContactsFragment :
             )
         )
         userContactAdapter?.addData(listUserContact)
-        viewBinding.rvContact.layoutManager = linearLayoutManager
-        viewBinding.rvContact.adapter = userContactAdapter
+        viewBinding.rvFavoriteContact.initRecyclerViewAdapter(
+            userContactAdapter,
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+            true
+        )
 //        viewBinding.rvContact.addItemDecoration(
 //            HeaderItemDecoration(
 //                viewBinding.rvContact as RecyclerView,

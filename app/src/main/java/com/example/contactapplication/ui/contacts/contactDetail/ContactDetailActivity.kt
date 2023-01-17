@@ -1,4 +1,4 @@
-package com.example.contactapplication.ui.contactDetail
+package com.example.contactapplication.ui.contacts.contactDetail
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -6,13 +6,15 @@ import android.net.Uri
 import android.view.LayoutInflater
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactapplication.App
 import com.example.contactapplication.base.BaseActivity
 import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.databinding.ActivityContactDetailBinding
 import com.example.contactapplication.ktext.Constant
-import com.example.contactapplication.ui.contactDetail.adapter.ContactInfoAdapter
+import com.example.contactapplication.ktext.recyclerView.initRecyclerViewAdapter
+import com.example.contactapplication.ui.contacts.contactDetail.adapter.ContactInfoAdapter
 
 
 class ContactDetailActivity :
@@ -54,7 +56,7 @@ class ContactDetailActivity :
     }
 
     private fun setView() {
-        with(viewBinding){
+        with(viewBinding) {
             tvContactName.text = contactName
             tvContactPhone.text = contactPhone
         }
@@ -68,12 +70,13 @@ class ContactDetailActivity :
     }
 
     private fun setAdapter() {
-        val linearLayoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         contactInfoAdapter = ContactInfoAdapter()
         contactInfoAdapter?.addData(listContactInfo)
-        viewBinding.rvContactInfo.layoutManager = linearLayoutManager
-        viewBinding.rvContactInfo.adapter = contactInfoAdapter
+        viewBinding.rvContactInfo.initRecyclerViewAdapter(
+            contactInfoAdapter,
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false),
+            true
+        )
     }
 
     private fun setOnClick() {
@@ -89,7 +92,12 @@ class ContactDetailActivity :
                         Constant.REQUEST_PHONE_CODE
                     )
                 } else {
-                    startActivity(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", contactPhone, null)))
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_DIAL,
+                            Uri.fromParts("tel", contactPhone, null)
+                        )
+                    )
                 }
             }
             btnSendMessage.setOnClickListener {

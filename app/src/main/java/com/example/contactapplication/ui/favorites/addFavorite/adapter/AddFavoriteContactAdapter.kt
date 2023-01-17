@@ -1,4 +1,4 @@
-package com.example.contactapplication.ui.contacts.adapter
+package com.example.contactapplication.ui.favorites.addFavorite.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,15 +8,13 @@ import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
 import com.example.contactapplication.databinding.ItemContactHeaderBinding
 import com.example.contactapplication.databinding.ItemContactUserBinding
 import com.example.contactapplication.model.remote.dto.UserContactDto
+import com.example.contactapplication.ui.contacts.adapter.HeaderItemDecoration
 
-class UserContactAdapter(
-    private val iClickItemUserContactListener: IClickItemContactListener
-) :
-    BaseRecyclerViewAdapter<UserContactDto, RecyclerView.ViewHolder>(),
+
+class AddFavoriteContactAdapter(
+    private val iClickItemUserContactListener: IClickItemAddFavoriteContactListener
+) : BaseRecyclerViewAdapter<UserContactDto, RecyclerView.ViewHolder>(),
     HeaderItemDecoration.StickyHeaderInterface {
-
-    private val headerType = 1
-    private val itemType = 2
 
     inner class UserContactViewHolder(
         private val viewBinding: ItemContactUserBinding
@@ -33,44 +31,16 @@ class UserContactAdapter(
         }
     }
 
-    inner class HeaderContactViewHolder(
-        private val viewBinding: ItemContactUserBinding
-    ) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBindHeader(item: UserContactDto?) {
-            with(viewBinding) {
-                tvUserName.text = item?.name
-                ivAvatar.setImageResource(R.drawable.ic_add_user)
-                layoutUserContact.setOnClickListener {
-                    iClickItemUserContactListener.onClickAddUserContact(
-                    )
-                }
-            }
-        }
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): RecyclerView.ViewHolder {
-
-        if (viewType == headerType)
-            return HeaderContactViewHolder(
-                ItemContactUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
         return UserContactViewHolder(
             ItemContactUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder.itemViewType == headerType) {
-            (holder as HeaderContactViewHolder).onBindHeader(getItem(position))
-        } else {
-            (holder as UserContactViewHolder).onBindData(getItem(position))
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return if (position == 0) headerType else itemType
+        (holder as UserContactViewHolder).onBindData(getItem(position))
     }
 
     override fun getHeaderPositionForItem(itemPosition: Int): Int =
@@ -104,8 +74,7 @@ class UserContactAdapter(
     }
 }
 
-interface IClickItemContactListener {
+interface IClickItemAddFavoriteContactListener {
     fun onClickItemUserContact(userContact: UserContactDto?)
-    fun onClickAddUserContact()
 }
 

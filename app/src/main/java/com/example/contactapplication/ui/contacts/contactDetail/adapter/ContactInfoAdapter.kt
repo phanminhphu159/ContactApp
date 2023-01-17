@@ -1,16 +1,16 @@
-package com.example.contactapplication.ui.contactDetail.adapter
+package com.example.contactapplication.ui.contacts.contactDetail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
+import com.example.contactapplication.databinding.ItemContactDetailBinding
 import com.example.contactapplication.model.remote.dto.UserContactDto
-import com.example.contactapplication.databinding.ItemDetailContactBinding
 
 class ContactInfoAdapter :
     BaseRecyclerViewAdapter<UserContactDto, ContactInfoAdapter.UserDetailContactViewHolder>() {
     class UserDetailContactViewHolder(
-        private val viewBinding: ItemDetailContactBinding
+        private val viewBinding: ItemContactDetailBinding
     ) : RecyclerView.ViewHolder(viewBinding.root) {
         fun onBindData(item: UserContactDto?) {
             with(viewBinding) {
@@ -21,7 +21,7 @@ class ContactInfoAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserDetailContactViewHolder {
         return UserDetailContactViewHolder(
-            ItemDetailContactBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemContactDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
