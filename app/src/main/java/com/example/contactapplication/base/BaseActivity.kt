@@ -1,5 +1,6 @@
 package com.example.contactapplication.base
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
@@ -18,8 +19,10 @@ abstract class BaseActivity<viewModel : BaseViewModel, viewBinding : ViewBinding
     protected val viewModel by ViewModelLazy(
         viewModelClass,
         { viewModelStore },
-        { defaultViewModelProviderFactory }
+        { defaultViewModelProviderFactory },
+        { defaultViewModelCreationExtras }
     )
+
     protected lateinit var viewBinding: viewBinding
     abstract fun inflateViewBinding(inflater: LayoutInflater): viewBinding
 

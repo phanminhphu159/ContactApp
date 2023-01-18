@@ -6,6 +6,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.contactapplication.base.BaseActivity
@@ -13,9 +14,11 @@ import com.example.contactapplication.data.dao.UserContactDao
 import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ActivityMainBinding
 import com.example.contactapplication.ktext.Constant
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-
+@AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewModel::class) {
 
     override fun inflateViewBinding(inflater: LayoutInflater): ActivityMainBinding {
@@ -29,12 +32,20 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewMo
     }
 
     private fun logDatabase() {
-        val userContactDao: UserContactDao = App.database.userDAO
-        val items: List<UserContactEntity> = userContactDao.getUsers()
+//        val userContactDao: UserContactDao = App.database.userDAO
+//        userContactDao.insert(
+//            UserContactEntity(
+//                name = "Bui Dang Duong",
+//                phone = "0905693609",
+//                favorite = false
+//            )
+//        )
         val currentDBPath = getDatabasePath("mydb.db").absolutePath
         Timber.plant(Timber.DebugTree())
-        Timber.i("List ::: ${items.toString()}")
-        Timber.i("DataBase ::: ${currentDBPath.toString()}")
+        App.listContact.observe(this) {
+            Timber.i("List ::: ${it.toString()}")
+            Timber.i("DataBase ::: ${currentDBPath.toString()}")
+        }
     }
 
     private fun setView() {

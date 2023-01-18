@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ItemContactDetailBinding
-import com.example.contactapplication.model.remote.dto.UserContactDto
 
 class ContactInfoAdapter :
-    BaseRecyclerViewAdapter<UserContactDto, ContactInfoAdapter.UserDetailContactViewHolder>() {
+    BaseRecyclerViewAdapter<UserContactEntity, ContactInfoAdapter.UserDetailContactViewHolder>() {
     class UserDetailContactViewHolder(
         private val viewBinding: ItemContactDetailBinding
     ) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBindData(item: UserContactDto?) {
+        fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
             }

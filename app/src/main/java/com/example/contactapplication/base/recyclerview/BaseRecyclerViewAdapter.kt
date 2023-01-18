@@ -55,6 +55,16 @@ abstract class BaseRecyclerViewAdapter<T, V : RecyclerView.ViewHolder>(
         }
     }
 
+    fun replaceRoomData(data: T, position: Int, newData: MutableList<T>?) {
+        handler.post {
+            newData?.let {
+                dataList = it
+                dataList.add(position, data)
+                notifyDataSetChanged()
+            }
+        }
+    }
+
     fun clearData(isNotify: Boolean = true) {
         dataList.clear()
         if (isNotify) notifyDataSetChanged()

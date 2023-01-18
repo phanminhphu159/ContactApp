@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.R
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ItemContactHeaderBinding
 import com.example.contactapplication.databinding.ItemContactUserBinding
-import com.example.contactapplication.model.remote.dto.UserContactDto
 
 class UserContactAdapter(
     private val iClickItemUserContactListener: IClickItemContactListener
 ) :
-    BaseRecyclerViewAdapter<UserContactDto, RecyclerView.ViewHolder>(),
+    BaseRecyclerViewAdapter<UserContactEntity, RecyclerView.ViewHolder>(),
     HeaderItemDecoration.StickyHeaderInterface {
 
     private val headerType = 1
@@ -21,7 +21,7 @@ class UserContactAdapter(
     inner class UserContactViewHolder(
         private val viewBinding: ItemContactUserBinding
     ) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBindData(item: UserContactDto?) {
+        fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
                 layoutUserContact.setOnClickListener {
@@ -36,7 +36,7 @@ class UserContactAdapter(
     inner class HeaderContactViewHolder(
         private val viewBinding: ItemContactUserBinding
     ) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBindHeader(item: UserContactDto?) {
+        fun onBindHeader(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
                 ivAvatar.setImageResource(R.drawable.ic_add_user)
@@ -105,7 +105,7 @@ class UserContactAdapter(
 }
 
 interface IClickItemContactListener {
-    fun onClickItemUserContact(userContact: UserContactDto?)
+    fun onClickItemUserContact(userContact: UserContactEntity?)
     fun onClickAddUserContact()
 }
 

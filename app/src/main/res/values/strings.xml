@@ -14,6 +14,7 @@
     <string name="save">Save</string>
     <string name="call_your_favorite_contact">Call your favorite contacts with just one tap</string>
     <string name="add_a_favorite">Add a favorite</string>
+    <string name="add_favorite_contact_successfully">Add contact to favorite successfully</string>
     <string name="add">Add</string>
     <string name="name">Name</string>
     <string name="word_a">A</string>
@@ -45,5 +46,6 @@
     <string name="ok">OK</string>
     <string name="notification">Notification</string>
     <string name="pls_fill_in_contact_name_or_password">Please fill in Contact"'"s name or password</string>
+    <string name="add_contact_successfully">Add contact succesfully</string>
 
 </resources>

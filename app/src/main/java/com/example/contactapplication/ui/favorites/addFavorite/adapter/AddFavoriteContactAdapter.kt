@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.R
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ItemContactHeaderBinding
 import com.example.contactapplication.databinding.ItemContactUserBinding
-import com.example.contactapplication.model.remote.dto.UserContactDto
 import com.example.contactapplication.ui.contacts.adapter.HeaderItemDecoration
 
 
 class AddFavoriteContactAdapter(
     private val iClickItemUserContactListener: IClickItemAddFavoriteContactListener
-) : BaseRecyclerViewAdapter<UserContactDto, RecyclerView.ViewHolder>(),
+) : BaseRecyclerViewAdapter<UserContactEntity, RecyclerView.ViewHolder>(),
     HeaderItemDecoration.StickyHeaderInterface {
 
     inner class UserContactViewHolder(
         private val viewBinding: ItemContactUserBinding
     ) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBindData(item: UserContactDto?) {
+        fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
                 layoutUserContact.setOnClickListener {
@@ -75,6 +75,6 @@ class AddFavoriteContactAdapter(
 }
 
 interface IClickItemAddFavoriteContactListener {
-    fun onClickItemUserContact(userContact: UserContactDto?)
+    fun onClickItemUserContact(userContact: UserContactEntity?)
 }
 

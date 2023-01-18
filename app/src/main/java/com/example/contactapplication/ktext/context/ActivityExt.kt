@@ -1,5 +1,8 @@
 package com.example.contactapplication.ktext.context
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -13,6 +16,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.contactapplication.App
+import com.example.contactapplication.R
 import com.example.contactapplication.ktext.AnimationType
 import com.example.contactapplication.ktext.SLIDE_LEFT
 import kotlinx.coroutines.CoroutineScope
@@ -37,6 +42,23 @@ inline fun FragmentActivity.launchAndRepeatWithViewLifecycle(
             block()
         }
     }
+}
+
+inline fun FragmentActivity.showDialog(
+    content: String,
+    context : Context
+) {
+    AlertDialog.Builder(context)
+        .setTitle(R.string.notification)
+        .setMessage(content) // Specifying a listener allows you to take an action before dismissing the dialog.
+        // The dialog is automatically dismissed when a dialog button is clicked.
+        .setPositiveButton(
+            R.string.ok,
+            DialogInterface.OnClickListener { dialog, which ->
+                // Continue with delete operation
+            }) // A null listener allows the button to dismiss the dialog and take no further action.
+        .setCancelable(false)
+        .show()
 }
 
 fun FragmentActivity.replaceFragment(

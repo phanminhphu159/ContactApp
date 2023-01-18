@@ -4,24 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactapplication.App
 import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
-import com.example.contactapplication.model.remote.dto.UserContactDto
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.FragmentContactsBinding
 import com.example.contactapplication.ktext.recyclerView.initRecyclerViewAdapter
 import com.example.contactapplication.ui.contacts.contactAddUser.ContactAddUserActivity
 import com.example.contactapplication.ui.contacts.contactDetail.ContactDetailActivity
 import com.example.contactapplication.ui.contacts.adapter.*
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ContactsFragment :
     BaseFragment<ContactsViewModel, FragmentContactsBinding>(ContactsViewModel::class),
     IClickItemContactListener {
 
-    private var listUserContact: MutableList<UserContactDto>? = null
     private var userContactAdapter: UserContactAdapter? = null
 
     override fun inflateViewBinding(
@@ -32,31 +32,23 @@ class ContactsFragment :
     }
 
     override fun initialize() {
-        setData()
         setAdapter()
+        setData()
     }
 
     private fun setData() {
-        listUserContact = mutableListOf()
-        for (userContact in App.listContact) {
-            listUserContact?.add(
-                UserContactDto(
-                    name = userContact.name,
-                    phone = userContact.phone
-                )
-            )
+        viewModel.listContact.observe(this) {
+            userContactAdapter?.replaceRoomData(UserContactEntity(
+                name = getString(R.string.add_user_contact),
+                phone = "",
+                favorite = false
+            ),0,it.toMutableList())
         }
     }
 
 
     private fun setAdapter() {
         userContactAdapter = UserContactAdapter(this)
-        listUserContact?.add(
-            0, UserContactDto(
-                name = getString(R.string.add_user_contact)
-            )
-        )
-        userContactAdapter?.addData(listUserContact)
         viewBinding.rvFavoriteContact.initRecyclerViewAdapter(
             userContactAdapter,
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
@@ -70,12 +62,11 @@ class ContactsFragment :
 //        )
     }
 
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
+    override fun onClickItemUserContact(userContact: UserContactEntity?) {
         val mIntent = Intent(activity, ContactDetailActivity::class.java)
         val mBundle = Bundle()
         mBundle.putString("name", userContact?.name)
         mBundle.putString("phone", userContact?.phone)
-        mBundle.putString("address", userContact?.address)
         mIntent.putExtras(mBundle);
         activity?.startActivity(mIntent)
     }

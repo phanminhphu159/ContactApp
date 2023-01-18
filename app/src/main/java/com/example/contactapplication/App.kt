@@ -3,11 +3,14 @@ package com.example.contactapplication
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.example.contactapplication.data.dao.UserContactDao
 import com.example.contactapplication.data.database.UsersDatabase
 import com.example.contactapplication.data.entity.UserContactEntity
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -23,8 +26,7 @@ class App : Application() {
                 .build()
         }
         appDatabaseDao = database.userDAO
-        applistUserContact = appDatabaseDao.getUsers()
-
+        appListUserContact = appDatabaseDao.getUsers()
     }
 
     companion object {
@@ -41,9 +43,9 @@ class App : Application() {
         val databaseDao: UserContactDao
             get() = appDatabaseDao
 
-        private lateinit var applistUserContact: List<UserContactEntity>
-        val listContact: List<UserContactEntity>
-            get() = applistUserContact
+        private lateinit var appListUserContact: LiveData<MutableList<UserContactEntity>>
+        val listContact: LiveData<MutableList<UserContactEntity>>
+            get() = appListUserContact
 
     }
 }

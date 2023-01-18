@@ -10,81 +10,70 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactapplication.App
 import com.example.contactapplication.base.fragment.BaseFragment
-import com.example.contactapplication.model.remote.dto.UserContactDto
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.FragmentRecentsBinding
 import com.example.contactapplication.ktext.Constant
 import com.example.contactapplication.ktext.recyclerView.initRecyclerViewAdapter
 import com.example.contactapplication.ui.recents.adapter.IClickItemRecentContactListener
 import com.example.contactapplication.ui.recents.adapter.UserRecentContactAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecentsFragment :
     BaseFragment<RecentsViewModel, FragmentRecentsBinding>(RecentsViewModel::class),
     IClickItemRecentContactListener {
 
-    private var listRecentContact: MutableList<UserContactDto>? = null
     private var recentContactAdapter: UserRecentContactAdapter? = null
 
     override fun inflateViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
+        inflater: LayoutInflater, container: ViewGroup?
     ): FragmentRecentsBinding {
         return FragmentRecentsBinding.inflate(inflater, container, false)
     }
 
     override fun initialize() {
-        setData()
         setAdapter()
+        setData()
     }
 
-    override fun onClickCallPhone(userContact: UserContactDto?) {
+    override fun onClickCallPhone(userContact: UserContactEntity?) {
         if (activity?.let {
                 ContextCompat.checkSelfPermission(
-                    it,
-                    android.Manifest.permission.CALL_PHONE
+                    it, android.Manifest.permission.CALL_PHONE
                 )
-            } != PackageManager.PERMISSION_GRANTED
-        ) {
+            } != PackageManager.PERMISSION_GRANTED) {
             activity?.let {
                 ActivityCompat.requestPermissions(
-                    it, arrayOf(android.Manifest.permission.CALL_PHONE),
-                    Constant.REQUEST_PHONE_CODE
+                    it, arrayOf(android.Manifest.permission.CALL_PHONE), Constant.REQUEST_PHONE_CODE
                 )
             }
         } else {
             startActivity(
                 Intent(
-                    Intent.ACTION_DIAL,
-                    Uri.fromParts("tel", userContact?.phone, null)
+                    Intent.ACTION_DIAL, Uri.fromParts("tel", userContact?.phone, null)
                 )
             )
         }
     }
 
-    override fun onClickCallVideo(userContact: UserContactDto?) {
+    override fun onClickCallVideo(userContact: UserContactEntity?) {
     }
 
-    override fun onClickSendMessage(userContact: UserContactDto?) {
+    override fun onClickSendMessage(userContact: UserContactEntity?) {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", userContact?.phone, null)))
     }
 
-    override fun onClickHistory(userContact: UserContactDto?) {
+    override fun onClickHistory(userContact: UserContactEntity?) {
     }
 
     private fun setData() {
-        listRecentContact = mutableListOf()
-        for (userContact in App.listContact) {
-            listRecentContact?.add(
-                UserContactDto(
-                    name = userContact.name,
-                    phone = userContact.phone
-                )
-            )
+        viewModel.listRecentContacts.observe(this) {
+            recentContactAdapter?.replaceData(it)
         }
     }
 
     private fun setAdapter() {
         recentContactAdapter = UserRecentContactAdapter(this)
-        recentContactAdapter?.addData(listRecentContact)
         viewBinding.rvRecentContact.initRecyclerViewAdapter(
             recentContactAdapter,
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),

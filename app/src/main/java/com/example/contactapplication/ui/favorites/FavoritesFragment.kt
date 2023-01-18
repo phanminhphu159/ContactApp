@@ -3,32 +3,29 @@ package com.example.contactapplication.ui.favorites
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contactapplication.App
 import com.example.contactapplication.R
 import com.example.contactapplication.base.fragment.BaseFragment
-import com.example.contactapplication.model.remote.dto.UserContactDto
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.FragmentFavoritesBinding
 import com.example.contactapplication.ktext.Constant
 import com.example.contactapplication.ktext.recyclerView.initRecyclerViewAdapter
-import com.example.contactapplication.ui.contacts.contactDetail.ContactDetailActivity
 import com.example.contactapplication.ui.favorites.adapter.FavoriteContactAdapter
 import com.example.contactapplication.ui.favorites.adapter.IClickItemFavoriteContactListener
 import com.example.contactapplication.ui.favorites.addFavorite.FavoriteAddActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoritesFragment :
     BaseFragment<FavoritesViewModel, FragmentFavoritesBinding>(FavoritesViewModel::class),
     IClickItemFavoriteContactListener {
 
-    private var listFavoriteContact: MutableList<UserContactDto>? = null
     private var favoriteContactAdapter: FavoriteContactAdapter? = null
 
     override fun inflateViewBinding(
@@ -39,39 +36,45 @@ class FavoritesFragment :
     }
 
     override fun initialize() {
-        setData()
         setView()
+        setData()
     }
 
     private fun setData() {
-        listFavoriteContact = mutableListOf()
-        for (userContact in App.listContact) {
-            listFavoriteContact?.add(
-                UserContactDto(
-                    name = userContact.name,
-                    phone = userContact.phone
-                )
-            )
+        viewModel.listFavorites.observe(this) {
+            favoriteContactAdapter?.clearData(true)
+            for ( contact in it ){
+                if (contact.favorite == true){
+                    favoriteContactAdapter?.itemCount?.let { count ->
+                        favoriteContactAdapter?.addItem(contact,
+                            count
+                        )
+                    }
+                }
+            }
+            if (!favoriteContactAdapter?.getData().isNullOrEmpty()) {
+                with(viewBinding) {
+                    rvFavoriteContact.visibility = View.VISIBLE
+                    layoutTitle.visibility = View.VISIBLE
+                    layoutNoData.visibility = View.GONE
+                }
+            }else{
+                with(viewBinding) {
+                    rvFavoriteContact.visibility = View.GONE
+                    layoutTitle.visibility = View.GONE
+                    layoutNoData.visibility = View.VISIBLE
+                }
+            }
         }
     }
 
     private fun setView() {
         setOnClick()
-        if (!listFavoriteContact.isNullOrEmpty()) {
-            setData()
-            with(viewBinding) {
-                rvFavoriteContact.visibility = View.VISIBLE
-                layoutTitle.visibility = View.VISIBLE
-                layoutNoData.visibility = View.GONE
-            }
-            setAdapter()
-        }
+        setAdapter()
     }
-
 
     private fun setAdapter() {
         favoriteContactAdapter = FavoriteContactAdapter(this)
-        favoriteContactAdapter?.addData(listFavoriteContact)
         viewBinding.rvFavoriteContact.initRecyclerViewAdapter(
             favoriteContactAdapter,
             GridLayoutManager(requireContext(), 3),
@@ -90,7 +93,7 @@ class FavoritesFragment :
         }
     }
 
-    override fun onClickItemUserContact(userContact: UserContactDto?) {
+    override fun onClickItemUserContact(userContact: UserContactEntity?) {
         if (activity?.let {
                 ContextCompat.checkSelfPermission(
                     it,

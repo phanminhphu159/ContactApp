@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
-import com.example.contactapplication.model.remote.dto.UserContactDto
+import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ItemRecentContactBinding
 
 class UserRecentContactAdapter(
     private val iClickItemRecentContactListener: IClickItemRecentContactListener
-) : BaseRecyclerViewAdapter<UserContactDto, UserRecentContactAdapter.UserRecentContactViewHolder>() {
+) : BaseRecyclerViewAdapter<UserContactEntity, UserRecentContactAdapter.UserRecentContactViewHolder>() {
     inner class UserRecentContactViewHolder(
         private val viewBinding: ItemRecentContactBinding
     ) : RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBindData(item: UserContactDto?) {
+        fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
                 layoutUserContact.setOnClickListener {
@@ -61,8 +61,8 @@ class UserRecentContactAdapter(
 }
 
 interface IClickItemRecentContactListener {
-    fun onClickCallPhone(userContact: UserContactDto?)
-    fun onClickCallVideo(userContact: UserContactDto?)
-    fun onClickSendMessage(userContact: UserContactDto?)
-    fun onClickHistory(userContact: UserContactDto?)
+    fun onClickCallPhone(userContact: UserContactEntity?)
+    fun onClickCallVideo(userContact: UserContactEntity?)
+    fun onClickSendMessage(userContact: UserContactEntity?)
+    fun onClickHistory(userContact: UserContactEntity?)
 }

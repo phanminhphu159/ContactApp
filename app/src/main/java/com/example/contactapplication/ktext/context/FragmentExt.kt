@@ -1,5 +1,8 @@
 package com.example.contactapplication.ktext.context
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
@@ -31,6 +34,23 @@ inline fun Fragment.launchAndRepeatWithViewLifecycle(
             block()
         }
     }
+}
+
+inline fun Fragment.showDialog(
+    content: String,
+    context: Context
+) {
+    AlertDialog.Builder(context)
+        .setTitle(R.string.notification)
+        .setMessage(content) // Specifying a listener allows you to take an action before dismissing the dialog.
+        // The dialog is automatically dismissed when a dialog button is clicked.
+        .setPositiveButton(
+            R.string.ok,
+            DialogInterface.OnClickListener { dialog, which ->
+                // Continue with delete operation
+            }) // A null listener allows the button to dismiss the dialog and take no further action.
+        .setCancelable(false)
+        .show()
 }
 
 fun Fragment.addOrReplaceFragment(
