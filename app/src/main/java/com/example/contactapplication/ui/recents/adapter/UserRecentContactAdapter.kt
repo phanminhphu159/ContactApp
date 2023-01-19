@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
 import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ItemRecentContactBinding
+import com.example.contactapplication.ktext.image.ImageUtil
 
 class UserRecentContactAdapter(
     private val iClickItemRecentContactListener: IClickItemRecentContactListener
@@ -18,6 +19,9 @@ class UserRecentContactAdapter(
         fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
+                if (item?.image?.isNotEmpty() == true){
+                    ivAvatar.setImageBitmap(ImageUtil.byteArrayToBitmap(item.image))
+                }
                 layoutUserContact.setOnClickListener {
                     if (layoutContactStuff.isVisible) {
                         lineHorizontal50.visibility = View.GONE

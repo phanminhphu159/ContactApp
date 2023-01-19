@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contactapplication.base.recyclerview.BaseRecyclerViewAdapter
 import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.ItemFavoriteContactBinding
+import com.example.contactapplication.ktext.image.ImageUtil
 
 
 class FavoriteContactAdapter(
@@ -18,6 +19,9 @@ class FavoriteContactAdapter(
         fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
+                if (item?.image?.isNotEmpty() == true){
+                    ivAvatar.setImageBitmap(ImageUtil.byteArrayToBitmap(item.image))
+                }
                 layoutUserContact.setOnClickListener {
                     iClickItemUserContactListener.onClickItemUserContact(
                         item

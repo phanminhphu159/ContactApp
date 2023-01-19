@@ -37,26 +37,21 @@ class FavoriteAddActivity :
     }
 
     override fun onClickItemUserContact(userContact: UserContactEntity?) {
-        val updatedUser = UserContactEntity(
-            uid = userContact?.uid,
-            name = userContact?.name,
-            phone = userContact?.phone,
-            favorite = !userContact?.favorite!!
-        )
-        viewModel.updateContact(updatedUser)
+        if (userContact != null) {
+            userContact.favorite = !userContact.favorite!!
+        }
+        userContact?.let { viewModel.updateContact(it) }
         showDialog(context = this@FavoriteAddActivity, content = getString(R.string.add_favorite_contact_successfully))
     }
 
     private fun setData() {
         viewModel.listContact.observe(this) {
-            addFavoriteContactAdapter?.replaceData(it)
+            addFavoriteContactAdapter?.replaceData(it.toMutableList())
         }
     }
 
     private fun setView() {
         setOnClick()
-        with(viewBinding) {
-        }
     }
 
     private fun setAdapter() {

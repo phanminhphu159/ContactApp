@@ -68,7 +68,7 @@ class RecentsFragment :
 
     private fun setData() {
         viewModel.listRecentContacts.observe(this) {
-            recentContactAdapter?.replaceData(it)
+            recentContactAdapter?.replaceData(it.toMutableList())
         }
     }
 

@@ -2,7 +2,7 @@ package com.example.contactapplication.data.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.example.contactapplication.App
+import com.example.contactapplication.data.database.DatabaseHelper
 import com.example.contactapplication.data.entity.UserContactEntity
 
 interface AppRepository {
@@ -15,18 +15,18 @@ interface AppRepository {
 class DatabaseRepository : AppRepository {
     @WorkerThread
     override fun getContacts(): LiveData<MutableList<UserContactEntity>> {
-        return App.listContact
+        return DatabaseHelper.listContact
     }
 
     override fun getRecentContacts(): LiveData<MutableList<UserContactEntity>> {
-        return App.listContact
+        return DatabaseHelper.listContact
     }
 
     override fun insert( contact: UserContactEntity) {
-        App.databaseDao.insert(contact)
+        DatabaseHelper.databaseDao.insert(contact)
     }
 
     override fun updateContact(contact: UserContactEntity) {
-        App.databaseDao.updateContact(contact)
+        DatabaseHelper.databaseDao.updateContact(contact)
     }
 }

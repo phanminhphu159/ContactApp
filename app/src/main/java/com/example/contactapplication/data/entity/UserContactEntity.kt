@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "users")
 data class UserContactEntity(
     @PrimaryKey(autoGenerate = true) val uid: Int? = null,
-    @ColumnInfo(name = "name") val name: String?,
-    @ColumnInfo(name = "phone") val phone: String?,
-    @ColumnInfo(name = "favorite") val favorite: Boolean?
+    @ColumnInfo(name = "name") var name: String?,
+    @ColumnInfo(name = "phone") var phone: String?,
+    @ColumnInfo(name = "favorite") var favorite: Boolean?,
+    @ColumnInfo(name = "image", typeAffinity = ColumnInfo.BLOB) var image: ByteArray?
 )

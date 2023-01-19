@@ -6,16 +6,13 @@ import android.net.Uri
 import android.view.LayoutInflater
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.contactapplication.base.BaseActivity
-import com.example.contactapplication.data.dao.UserContactDao
-import com.example.contactapplication.data.entity.UserContactEntity
+import com.example.contactapplication.data.database.DatabaseHelper
 import com.example.contactapplication.databinding.ActivityMainBinding
 import com.example.contactapplication.ktext.Constant
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -42,7 +39,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewMo
 //        )
         val currentDBPath = getDatabasePath("mydb.db").absolutePath
         Timber.plant(Timber.DebugTree())
-        App.listContact.observe(this) {
+        DatabaseHelper.listContact.observe(this) {
             Timber.i("List ::: ${it.toString()}")
             Timber.i("DataBase ::: ${currentDBPath.toString()}")
         }
