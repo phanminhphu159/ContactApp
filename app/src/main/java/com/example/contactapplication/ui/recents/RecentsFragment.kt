@@ -48,8 +48,7 @@ class RecentsFragment :
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == Constant.PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission is granted
-                viewModel.getCallLogWithDuration(context)
+                viewModel.getCallLogsData(context)
             } else {
                 Toast.makeText(context, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
             }
@@ -102,16 +101,13 @@ class RecentsFragment :
     }
 
     private fun showContacts() {
-        // Check the SDK version and whether the permission is already granted or not.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context?.let { checkSelfPermission(it,Manifest.permission.READ_CONTACTS) } != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(
                 arrayOf(Manifest.permission.READ_CONTACTS),
                 Constant.PERMISSIONS_REQUEST_READ_CONTACTS
             )
-            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
         } else {
-            // Android version is lesser than 6.0 or the permission is already granted.
-            viewModel.getCallLogWithDuration(context)
+            viewModel.getCallLogsData(context)
         }
     }
 }

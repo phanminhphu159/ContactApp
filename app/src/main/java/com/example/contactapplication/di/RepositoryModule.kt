@@ -1,6 +1,5 @@
 package com.example.contactapplication.di
 
-import com.example.contactapplication.data.database.UsersDatabase
 import com.example.contactapplication.data.repository.AppRepository
 import com.example.contactapplication.data.repository.DatabaseRepository
 import dagger.Module

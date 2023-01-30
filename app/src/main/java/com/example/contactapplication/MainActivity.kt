@@ -9,11 +9,9 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.contactapplication.base.BaseActivity
-import com.example.contactapplication.data.database.DatabaseHelper
 import com.example.contactapplication.databinding.ActivityMainBinding
 import com.example.contactapplication.ktext.Constant
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewModel::class) {
@@ -25,24 +23,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewMo
     override fun initialize() {
         setView()
         setOnClick()
-        logDatabase()
-    }
-
-    private fun logDatabase() {
-//        val userContactDao: UserContactDao = App.database.userDAO
-//        userContactDao.insert(
-//            UserContactEntity(
-//                name = "Bui Dang Duong",
-//                phone = "0905693609",
-//                favorite = false
-//            )
-//        )
-        val currentDBPath = getDatabasePath("mydb.db").absolutePath
-        Timber.plant(Timber.DebugTree())
-        DatabaseHelper.listContact.observe(this) {
-            Timber.i("List ::: ${it.toString()}")
-            Timber.i("DataBase ::: ${currentDBPath.toString()}")
-        }
     }
 
     private fun setView() {

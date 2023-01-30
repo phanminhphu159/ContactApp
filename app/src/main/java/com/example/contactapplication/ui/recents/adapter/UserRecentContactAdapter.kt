@@ -19,6 +19,7 @@ class UserRecentContactAdapter(
         fun onBindData(item: UserContactEntity?) {
             with(viewBinding) {
                 tvUserName.text = item?.name
+                tvTimeCall.text = item?.time
                 if (item?.image?.isNotEmpty() == true){
                     ivAvatar.setImageBitmap(ImageUtil.byteArrayToBitmap(item.image))
                 }

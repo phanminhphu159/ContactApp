@@ -76,7 +76,9 @@ class ContactAddUserActivity :
                     name = etContactName.text.toString(),
                     phone = etContactPhone.text.toString(),
                     favorite = false,
-                    image = ImageUtil.bitmapToByteArray(contactImage)
+                    image = ImageUtil.bitmapToByteArray(contactImage),
+                    status = null,
+                    time = null
                 )
                 viewModel.addContact(userContactEntity)
                 etContactName.text?.clear()

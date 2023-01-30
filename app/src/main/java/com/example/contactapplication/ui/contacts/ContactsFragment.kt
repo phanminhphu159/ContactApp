@@ -44,7 +44,9 @@ class ContactsFragment :
                     name = getString(R.string.add_user_contact),
                     phone = "",
                     favorite = false,
-                    image = null
+                    image = null,
+                    time = null,
+                    status = null
                 ), 0, it.toMutableList()
             )
         }
