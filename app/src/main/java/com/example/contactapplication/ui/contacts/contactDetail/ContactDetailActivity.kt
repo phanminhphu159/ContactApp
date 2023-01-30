@@ -2,7 +2,6 @@ package com.example.contactapplication.ui.contacts.contactDetail
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -112,7 +111,12 @@ class ContactDetailActivity :
                 }
             }
             btnSendMessage.setOnClickListener {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", userContact?.phone, null)))
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.fromParts("sms", userContact?.phone, null)
+                    )
+                )
             }
             btnCallVideo.setOnClickListener { }
             ivBackButton.setOnClickListener { onBackPressed() }

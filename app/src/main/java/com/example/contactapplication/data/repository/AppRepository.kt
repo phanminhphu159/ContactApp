@@ -8,6 +8,7 @@ import com.example.contactapplication.data.entity.UserContactEntity
 interface AppRepository {
     fun getContacts(): LiveData<MutableList<UserContactEntity>>
     fun getRecentContacts(): LiveData<MutableList<UserContactEntity>>
+    fun getLogContacts(): LiveData<MutableList<UserContactEntity>>
     fun insert( contact: UserContactEntity)
     fun updateContact( contact: UserContactEntity)
 }
@@ -20,6 +21,10 @@ class DatabaseRepository : AppRepository {
 
     override fun getRecentContacts(): LiveData<MutableList<UserContactEntity>> {
         return DatabaseHelper.listContact
+    }
+
+    override fun getLogContacts(): LiveData<MutableList<UserContactEntity>> {
+        TODO("Not yet implemented")
     }
 
     override fun insert( contact: UserContactEntity) {

@@ -1,14 +1,17 @@
 package com.example.contactapplication.ui.recents
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.contactapplication.App
 import com.example.contactapplication.base.fragment.BaseFragment
 import com.example.contactapplication.data.entity.UserContactEntity
 import com.example.contactapplication.databinding.FragmentRecentsBinding
@@ -34,6 +37,23 @@ class RecentsFragment :
     override fun initialize() {
         setAdapter()
         setData()
+        showContacts()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constant.PERMISSIONS_REQUEST_READ_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted
+                viewModel.getCallLogWithDuration(context)
+            } else {
+                Toast.makeText(context, "Until you grant the permission, we canot display the names", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     override fun onClickCallPhone(userContact: UserContactEntity?) {
@@ -76,8 +96,22 @@ class RecentsFragment :
         recentContactAdapter = UserRecentContactAdapter(this)
         viewBinding.rvRecentContact.initRecyclerViewAdapter(
             recentContactAdapter,
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false),
             true
         )
+    }
+
+    private fun showContacts() {
+        // Check the SDK version and whether the permission is already granted or not.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context?.let { checkSelfPermission(it,Manifest.permission.READ_CONTACTS) } != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_CONTACTS),
+                Constant.PERMISSIONS_REQUEST_READ_CONTACTS
+            )
+            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+        } else {
+            // Android version is lesser than 6.0 or the permission is already granted.
+            viewModel.getCallLogWithDuration(context)
+        }
     }
 }
